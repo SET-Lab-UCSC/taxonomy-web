@@ -1,1 +1,1 @@
-this is the website for our taxonomy proj! 
+# Taxonomy of XR Interactions
