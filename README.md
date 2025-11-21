@@ -1,15 +1,15 @@
 # Taxonomy of XR Interactions
+In-progress web visualization of XR interaction techniques.
 
 ## Development Instructions
-1. Clone repository on local or use GitHub Codespaces. 
-2. On terminal, run
+Clone repository locally or use GitHub Codespaces to launch a development environment
+### Install Dependencies
 `npm install`
-to initialize dependencies.
-3. To display Taxonomy of XR Interactions website locally, run
+### Run Locally
 `npm run dev`
-4. To build website, run
+### Build and Deploy
 `npm run build`
-5. Commit new changes onto GitHub to deploy on GitHub Pages.
+Commit changes to deploy with GitHub Pages
 
 ## Observation Instructions
 1. Add observations on the given Google Sheet.
