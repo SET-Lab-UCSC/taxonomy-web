@@ -423,7 +423,7 @@ License: MIT
 var papaparse_minExports = papaparse_min.exports;
 const Papa = /* @__PURE__ */ getDefaultExportFromCjs(papaparse_minExports);
 async function loadCsvAsJson() {
-  const response = await fetch("/Taxonomy Observations - Obvservations.csv");
+  const response = await fetch("./Taxonomy Observations - Obvservations.csv");
   const csvText = await response.text();
   const parsed = Papa.parse(csvText, {
     header: true,
@@ -438,4 +438,4 @@ loadCsvAsJson().then((data) => {
 export {
   loadCsvAsJson as l
 };
-//# sourceMappingURL=csvtojson-BRXkaYnh.js.map
+//# sourceMappingURL=csvtojson-QvTtu82S.js.map
