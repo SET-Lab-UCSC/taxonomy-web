@@ -10,6 +10,8 @@ Clone repository locally or use GitHub Codespaces to launch a development enviro
 ### Build and Deploy
 `npm run build`
 Commit changes to deploy with GitHub Pages
+### Adding New .html Page in src
+If adding a new page, add the source to `vite.config.js` ie. `explore: resolve(__dirname, 'src/explore.html'),`
 
 ## Observation Instructions
 1. Add observations on the given Google Sheet.
