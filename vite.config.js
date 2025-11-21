@@ -7,7 +7,7 @@ const isCodeSandbox =
 export default {
   root: "src/",
   publicDir: "../static/",
-  base: "./",
+  base: "/taxonomy-web",
   server: {
     host: true,
     open: !isCodeSandbox, // Open if it's not a CodeSandbox
