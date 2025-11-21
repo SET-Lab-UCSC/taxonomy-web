@@ -1,22 +1,33 @@
 // import glsl from "vite-plugin-glsl";
 // import basicSsl from "@vitejs/plugin-basic-ssl";
 
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
+
 const isCodeSandbox =
   "SANDBOX_URL" in process.env || "CODESANDBOX_HOST" in process.env;
 
 export default {
-  root: "src/",
+  root: resolve(__dirname, 'src'),
   publicDir: "../static/",
-  base: "/taxonomy-web",
-  server: {
-    host: true,
-    open: !isCodeSandbox, // Open if it's not a CodeSandbox
-  },
+  base: "./",
   build: {
     outDir: "../docs",
     emptyOutDir: true,
     sourcemap: true,
     minify: false,
+    rollupOptions: {
+      input: {
+        index: resolve(__dirname, 'src/index.html'),   // include your main page
+        tasks: resolve(__dirname, 'src/tasks.html'),
+        explore: resolve(__dirname, 'src/explore.html'),
+
+      },
+    },
+  },
+  server: {
+    host: true,
+    open: !isCodeSandbox,
   },
   plugins: [],
 };
