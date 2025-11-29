@@ -65,10 +65,10 @@
         </section>
 
         <script type="module">
-            import { loadCsvAsJson } from "./convertJSON.js";
+            import { loadObsAsJson } from "./convertJSON.js";
 
             document.addEventListener("DOMContentLoaded", async () => {
-                const submissions = await loadCsvAsJson();
+                const submissions = await loadObsAsJson();
 
                 submissions.reverse(); // show most recent first
 
@@ -88,6 +88,7 @@
                 });
 
                 // Scroll buttons
+                // TODO: have buttons slide images left/right when there are hidden images
                 const btnLeft = document.querySelector(".carousel-nav-left");
                 const btnRight = document.querySelector(".carousel-nav-right");
 

@@ -422,7 +422,7 @@ License: MIT
 })(papaparse_min);
 var papaparse_minExports = papaparse_min.exports;
 const Papa = /* @__PURE__ */ getDefaultExportFromCjs(papaparse_minExports);
-async function loadCsvAsJson() {
+async function loadObsAsJson() {
   const response = await fetch("./Taxonomy Observations - Obvservations.csv");
   const csvText = await response.text();
   const parsed = Papa.parse(csvText, {
@@ -432,10 +432,18 @@ async function loadCsvAsJson() {
   const jsonObject = parsed.data;
   return jsonObject;
 }
-loadCsvAsJson().then((data) => {
-  console.log("JSON Object:", data);
-});
+async function loadAppsAsJson() {
+  const response = await fetch("./Taxonomy Observations - Applications.csv");
+  const csvText = await response.text();
+  const parsed = Papa.parse(csvText, {
+    header: true,
+    skipEmptyLines: true
+  });
+  const jsonObject = parsed.data;
+  return jsonObject;
+}
 export {
-  loadCsvAsJson as l
+  loadAppsAsJson as a,
+  loadObsAsJson as l
 };
-//# sourceMappingURL=csvtojson-QvTtu82S.js.map
+//# sourceMappingURL=csvtojson-DRLF1_1V.js.map

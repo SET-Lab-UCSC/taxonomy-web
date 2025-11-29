@@ -10,7 +10,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&family=Archivo+Black&display=swap"
         rel="stylesheet">
-  <link rel="stylesheet" crossorigin href="./assets/applications-BBdryYm9.css">
+  <script type="module" crossorigin src="./assets/applications-DWQX69LA.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-DaKOjhqt.js">
+  <link rel="modulepreload" crossorigin href="./assets/csvtojson-DRLF1_1V.js">
+  <link rel="stylesheet" crossorigin href="./assets/applications-CcVr6iBf.css">
   <link rel="stylesheet" crossorigin href="./assets/styles-DcWEBwgG.css">
 </head>
 
@@ -48,93 +51,20 @@
         </div>
 
         <!-- Applications Grid -->
-        <div class="apps-grid">
-            <div class="app-card">
-                <div class="app-image app-fruit-ninja"></div>
-                <div class="app-info">
-                    <h3 class="app-title">Fruit Ninja (2010)</h3>
-                    <div class="app-buttons">
-                        <button class="btn-gifs">Gifs</button>
-                        <a href="fruit-ninja/fruit-ninja.html" class="btn-more">More</a>
-                    </div>
+        <section class="section">
+            <div class="application-wrapper">
+                <div class="application-container">
+
                 </div>
             </div>
+        </section>
 
-            <div class="app-card">
-                <div class="app-image app-beat-saber"></div>
-                <div class="app-info">
-                    <h3 class="app-title">Beat Saber (2018)</h3>
-                    <div class="app-buttons">
-                        <button class="btn-gifs">Gifs</button>
-                        <button class="btn-more">More</button>
-                    </div>
-                </div>
-            </div>
 
-            <div class="app-card">
-                <div class="app-image app-gorilla-tag"></div>
-                <div class="app-info">
-                    <h3 class="app-title">Gorilla Tag (2021)</h3>
-                    <div class="app-buttons">
-                        <button class="btn-gifs">Gifs</button>
-                        <button class="btn-more">More</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="app-card">
-                <div class="app-image app-shapes-xr"></div>
-                <div class="app-info">
-                    <h3 class="app-title">ShapesXR (2021)</h3>
-                    <div class="app-buttons">
-                        <button class="btn-gifs">Gifs</button>
-                        <button class="btn-more">More</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="app-card">
-                <div class="app-image app-tilt-brush"></div>
-                <div class="app-info">
-                    <h3 class="app-title">Tilt Brush (2016)</h3>
-                    <div class="app-buttons">
-                        <button class="btn-gifs">Gifs</button>
-                        <button class="btn-more">More</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="app-card">
-                <div class="app-image app-museum"></div>
-                <div class="app-info">
-                    <h3 class="app-title">Museum of Other Realities (2020)</h3>
-                    <div class="app-buttons">
-                        <button class="btn-gifs">Gifs</button>
-                        <button class="btn-more">More</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="app-card">
-                <div class="app-image app-half-life"></div>
-                <div class="app-info">
-                    <h3 class="app-title">Half-Life Alyx (2020)</h3>
-                    <div class="app-buttons">
-                        <button class="btn-gifs">Gifs</button>
-                        <button class="btn-more">More</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="app-card">
-                <div class="app-image app-gravity-sketch"></div>
-                <div class="app-info">
-                    <h3 class="app-title">Gravity Sketch (2014)</h3>
-                    <div class="app-buttons">
-                        <button class="btn-gifs">Gifs</button>
-                        <button class="btn-more">More</button>
-                    </div>
-                </div>
+        <div id="gif-modal" class="modal hidden">
+            <div class="modal-content">
+                <span id="close-modal" class="modal-close">&times;</span>
+                <img id="modal-gif" />
+                <div id="modal-meta"></div>
             </div>
         </div>
     </main>
