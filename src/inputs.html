@@ -55,29 +55,74 @@
             </div>
         </section>
         <script type="module">
-            import { loadObsAsJson } from "./convertJSON.js";
+            import { loadObsAsJson, loadInputsAsJson } from "./convertJSON.js";
             document.addEventListener("DOMContentLoaded", async () => {
-                const submissions = await loadObsAsJson();
-
+                const obsSubmissions = await loadObsAsJson();
+                const inputSubmissions = await loadInputsAsJson();
+                const submissions = Object.assign({}, obsSubmissions, inputSubmissions);
                 const list = document.getElementById("csv-list");
-                const set = new Set(); // ensures unique values
+                const elements = [];
 
-                // CHANGE "Tags" to your actual column name
-                submissions.forEach(row => {
+                // obsSubmissions.forEach(row => {
 
-                    const values = row.Input.split(",").map(v => v.trim());
-                    values.forEach(v => set.add(v));
+                //     const values = row.Interface_Elements.split(",").map(v => v.trim());
+
+                //     if (!values[0]) {
+                //         return;
+                //     }
+                //     values.forEach(v => {
+                //         elements.push(v)
+                //     });
+                // });
+
+                inputSubmissions.forEach(row => {
+                    elements.push(row.Inputs);
                 });
 
+                const uniqueElements = [...new Set(elements)];
+                // uniqueElements.sort();
 
-                // Add each unique value to the list
-                set.forEach(value => {
+                uniqueElements.forEach(value => {
                     const li = document.createElement("li");
+                    li.classList.add("input-element");
                     li.textContent = value;
                     list.appendChild(li);
                 });
+
+                document.querySelectorAll(".input-element").forEach((element, index) => {
+                    element.addEventListener("click", () => {
+                        const submission = submissions[index];
+                        console.log(submission);
+
+                        document.getElementById("modal-meta").innerHTML = `
+                        <p><strong>Name:</strong> ${submission.Inputs}</p>
+                        <p><strong>Description:</strong> ${submission.Description || "No description"}</p>
+                    
+                        `;
+
+                        document.getElementById("gif-modal").classList.remove("hidden");
+
+
+                    });
+
+                    document.getElementById("close-modal").addEventListener("click", () => {
+                        document.getElementById("gif-modal").classList.add("hidden");
+                    });
+
+                    // Optional: close modal when clicking background
+                    document.getElementById("gif-modal").addEventListener("click", (e) => {
+                        if (e.target.id === "gif-modal") {
+                            document.getElementById("gif-modal").classList.add("hidden");
+                        }
+                    });
+                });
             });
         </script>
+        <div id="gif-modal" class="modal hidden">
+            <div class="modal-content">
+                <span id="close-modal" class="modal-close">&times;</span>
+                <div id="modal-meta"></div>
+            </div>
     </main>
 </body>
 

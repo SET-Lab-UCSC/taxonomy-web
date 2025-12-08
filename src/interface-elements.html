@@ -54,31 +54,73 @@
             </div>
         </section>
         <script type="module">
-            import { loadObsAsJson } from "./convertJSON.js";
+            import { loadObsAsJson, loadFaceAsJson } from "./convertJSON.js";
             document.addEventListener("DOMContentLoaded", async () => {
-                const submissions = await loadObsAsJson();
-
+                const obsSubmissions = await loadObsAsJson();
+                const faceSumissions = await loadFaceAsJson();
+                const submissions = Object.assign({}, obsSubmissions, faceSumissions);
                 const list = document.getElementById("csv-list");
-                const set = new Set(); // ensures unique values
+                const elements = [];
+                // obsSubmissions.forEach(row => {
 
-                // CHANGE "Tags" to your actual column name
-                submissions.forEach(row => {
+                //     const values = row.Interface_Elements.split(",").map(v => v.trim());
+                //     if (!values[0]) {
+                //         return;
+                //     }
+                //     values.forEach(v => {
+                //         elements.push(v)
+                //     });
+                // });
 
-                    console.log(row.Interface_Elements);
-
-                    const values = row.Interface_Elements.split(",").map(v => v.trim());
-                    values.forEach(v => set.add(v));
+                faceSumissions.forEach(row => {
+                    elements.push(row.Interface_Element);
                 });
 
+                const uniqueElements = [...new Set(elements)];
+                // uniqueElements.sort();
 
-                // Add each unique value to the list
-                set.forEach(value => {
+                uniqueElements.forEach(value => {
                     const li = document.createElement("li");
+                    li.classList.add("interface-element");
                     li.textContent = value;
                     list.appendChild(li);
                 });
+
+                document.querySelectorAll(".interface-element").forEach((element, index) => {
+                    element.addEventListener("click", () => {
+                        const submission = submissions[index];
+                        console.log(submission);
+
+                        document.getElementById("modal-meta").innerHTML = `
+                        <p><strong>Name:</strong> ${submission.Interface_Element}</p>
+                        <p><strong>Description:</strong> ${submission.Description || "No description"}</p>
+                    
+                        `;
+
+                        document.getElementById("gif-modal").classList.remove("hidden");
+
+
+                    });
+
+                    document.getElementById("close-modal").addEventListener("click", () => {
+                        document.getElementById("gif-modal").classList.add("hidden");
+                    });
+
+                    // Optional: close modal when clicking background
+                    document.getElementById("gif-modal").addEventListener("click", (e) => {
+                        if (e.target.id === "gif-modal") {
+                            document.getElementById("gif-modal").classList.add("hidden");
+                        }
+                    });
+                });
             });
         </script>
+
+        <div id="gif-modal" class="modal hidden">
+            <div class="modal-content">
+                <span id="close-modal" class="modal-close">&times;</span>
+                <div id="modal-meta"></div>
+            </div>
     </main>
 </body>
 

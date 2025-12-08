@@ -55,25 +55,37 @@
             </div>
         </section>
         <script type="module">
-            import { loadObsAsJson } from "./convertJSON.js";
+            import { loadObsAsJson, loadTasksAsJson } from "./convertJSON.js";
             document.addEventListener("DOMContentLoaded", async () => {
-                const submissions = await loadObsAsJson();
+                const obsSubmissions = await loadObsAsJson();
+                const taskSubmissions = await loadTasksAsJson();
 
                 const list = document.getElementById("csv-list");
-                const set = new Set(); // ensures unique values
+                const elements = [];
 
                 // CHANGE "Tags" to your actual column name
-                submissions.forEach(row => {
+                obsSubmissions.forEach(row => {
 
-                    console.log(row.Task);
-
-                    const values = row.Task.split(",").map(v => v.trim());
-                    values.forEach(v => set.add(v));
+                    const values = row.Interface_Elements.split(",").map(v => v.trim());
+                    if (!values[0]) {
+                        return;
+                    }
+                    values.forEach(v => {
+                        elements.push(v)
+                    });
                 });
+
+                taskSubmissions.forEach(row => {
+                    elements.push(row.Tasks);
+                });
+
+                elements.filter((item, index) => elements.indexOf(item) !== index); // Remove any duplicates
+                elements.sort();
+
 
 
                 // Add each unique value to the list
-                set.forEach(value => {
+                elements.forEach(value => {
                     const li = document.createElement("li");
                     li.textContent = value;
                     list.appendChild(li);

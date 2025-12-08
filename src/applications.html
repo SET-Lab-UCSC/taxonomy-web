@@ -79,7 +79,7 @@
                 document.querySelectorAll(".application-image").forEach((img, index) => {
                     img.addEventListener("click", () => {
                         const submission = submissions[index]; // same ordering
-
+                        console.log(submission);
                         // Fill modal
                         document.getElementById("modal-gif").src = submission.Thumbnail;
 
