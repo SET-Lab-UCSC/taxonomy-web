@@ -59,39 +59,72 @@
             document.addEventListener("DOMContentLoaded", async () => {
                 const obsSubmissions = await loadObsAsJson();
                 const taskSubmissions = await loadTasksAsJson();
+                const submissions = Object.assign({}, obsSubmissions, taskSubmissions);
 
                 const list = document.getElementById("csv-list");
                 const elements = [];
 
                 // CHANGE "Tags" to your actual column name
-                obsSubmissions.forEach(row => {
+                // obsSubmissions.forEach(row => {
 
-                    const values = row.Interface_Elements.split(",").map(v => v.trim());
-                    if (!values[0]) {
-                        return;
-                    }
-                    values.forEach(v => {
-                        elements.push(v)
-                    });
-                });
+                //     const values = row.Interface_Elements.split(",").map(v => v.trim());
+                //     if (!values[0]) {
+                //         return;
+                //     }
+                //     values.forEach(v => {
+                //         elements.push(v)
+                //     });
+                // });
 
                 taskSubmissions.forEach(row => {
                     elements.push(row.Tasks);
                 });
 
-                elements.filter((item, index) => elements.indexOf(item) !== index); // Remove any duplicates
-                elements.sort();
+                const uniqueElements = [...new Set(elements)];
+                // uniqueElements.sort();
 
-
-
-                // Add each unique value to the list
-                elements.forEach(value => {
+                uniqueElements.forEach(value => {
                     const li = document.createElement("li");
+                    li.classList.add("interaction-element");
                     li.textContent = value;
                     list.appendChild(li);
                 });
+
+                document.querySelectorAll(".interaction-element").forEach((element, index) => {
+                    element.addEventListener("click", () => {
+                        const submission = submissions[index];
+                        console.log(submission);
+
+                        document.getElementById("modal-meta").innerHTML = `
+                        <p><strong>Name:</strong> ${submission.Tasks}</p>
+                        <p><strong>Description:</strong> ${submission.Description || "No description"}</p>
+                    
+                        `;
+
+                        document.getElementById("gif-modal").classList.remove("hidden");
+
+
+                    });
+
+                    document.getElementById("close-modal").addEventListener("click", () => {
+                        document.getElementById("gif-modal").classList.add("hidden");
+                    });
+
+                    // Optional: close modal when clicking background
+                    document.getElementById("gif-modal").addEventListener("click", (e) => {
+                        if (e.target.id === "gif-modal") {
+                            document.getElementById("gif-modal").classList.add("hidden");
+                        }
+                    });
+                });
             });
         </script>
+
+        <div id="gif-modal" class="modal hidden">
+            <div class="modal-content">
+                <span id="close-modal" class="modal-close">&times;</span>
+                <div id="modal-meta"></div>
+            </div>
     </main>
 </body>
 
